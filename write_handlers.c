@@ -16,13 +16,13 @@ int handle_write_char(char c, char buffer[],
 	int flags, int width, int precision, int size)
 { /* char is stored at left and paddind at buffer's right */
 	int b = 0;
-	char padd = ' ';
+	char j = ' ';
 
 	UNUSED(precision);
 	UNUSED(size);
 
 	if (flags & F_ZERO)
-		padd = '0';
+		j = '0';
 
 	buffer[b++] = c;
 	buffer[b] = '\0';
@@ -31,7 +31,7 @@ int handle_write_char(char c, char buffer[],
 	{
 		buffer[BUFF_SIZE - 1] = '\0';
 		for (b = 0; b < width - 1; b++)
-			buffer[BUFF_SIZE - b - 2] = padd;
+			buffer[BUFF_SIZE - b - 2] = j;
 
 		if (flags & F_MINUS)
 			return (write(1, &buffer[0], 1) +
@@ -111,7 +111,7 @@ int write_num(int ind, char buffer[],
 		length++;
 	if (width > length)
 	{
-		for (i = 1; b < width - length + 1; b++)
+		for (b = 1; b < width - length + 1; b++)
 			buffer[b] = padd;
 		buffer[b] = '\0';
 		if (flags & F_MINUS && padd == ' ')/* Asign extra char to left of buffer */
@@ -130,7 +130,7 @@ int write_num(int ind, char buffer[],
 		{
 			if (extra_c)
 				buffer[--padd_start] = extra_c;
-			return (write(1, &buffer[padd_start], i - padd_start) +
+			return (write(1, &buffer[padd_start], b - padd_start) +
 				write(1, &buffer[ind], length - (1 - padd_start)));
 		}
 	}
@@ -235,7 +235,7 @@ int write_pointer(char buffer[], int ind, int length,
 			buffer[--ind] = '0';
 			if (extra_c)
 				buffer[--ind] = extra_c;
-			return (write(1, &buffer[3], i - 3) + write(1, &buffer[ind], length));
+			return (write(1, &buffer[3], b - 3) + write(1, &buffer[ind], length));
 		}
 		else if (!(flags & F_MINUS) && padd == '0')/* extra char to left of padd */
 		{
