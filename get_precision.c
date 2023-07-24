@@ -9,9 +9,9 @@
  * Return: Precision.
  */
 
-int get_precision(const char *format, int *b, va_list list)
+int get_precision(const char *format, int *i, va_list list)
 {
-	int curr_j = *b + 1;
+	int curr_j = *i + 1;
 	int precision = -1;
 
 	if (format[curr_j] != '.')
@@ -36,7 +36,7 @@ int get_precision(const char *format, int *b, va_list list)
 			break;
 	}
 
-	*b = curr_j - 1;
+	*i = curr_j - 1;
 
 	return (precision);
 }

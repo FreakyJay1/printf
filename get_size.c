@@ -7,9 +7,9 @@
  *
  * Return: size
  */
-int get_size(const char *format, int *b)
+int get_size(const char *format, int *i)
 {
-	int curr_j = *b + 1;
+	int curr_j = *i + 1;
 	int size = 0;
 
 	if (format[curr_j] == 'l')
@@ -18,9 +18,9 @@ int get_size(const char *format, int *b)
 		size = S_SHORT;
 
 	if (size == 0)
-		*b = curr_j - 1;
+		*i = curr_j - 1;
 	else
-		*b = curr_j;
+		*i = curr_j;
 
 	return (size);
 }
