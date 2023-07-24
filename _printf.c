@@ -7,6 +7,27 @@ void print_buffer(char buffer[], int *buff_ind);
  * @format: format.
  * Return: Printed chars.
  */
+
+/********** Write Handle **********/
+/*
+ * handle_write_char - prints a string
+ * @c: char types
+ * @buffer: Buffer array to handle print
+ * @flags: Calculates active flags
+ * @width: get width
+ * @percision: precision specifier
+ * @size: Size specifier
+ *
+ * Return: Numbers of chars printed
+ */
+
+int handle_write_char(char c, char buffer[],
+	int flags, int width, int precision, int size)
+{ /* char is stored at left and paddind at buffer's right */
+	int i = 0;
+	char padd = ' ';
+}
+
 int _printf(const char *format, ...)
 {
 	int b, printed = 0, printed_chars = 0;
